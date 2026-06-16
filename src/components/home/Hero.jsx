@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import logo from "../../assets/logo/white-crow-wb.png";
-import useScrollReveal from "../../hooks/UseScrollReveal";
+import useScrollReveal from "../../hooks/useScrollReveal";
 
 const tagline = "Somos Ravenmind. Creamos software a medida, interfaces limpias y soluciones inteligentes que impulsan el crecimiento de tu negocio.";
 

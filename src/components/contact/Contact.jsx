@@ -31,7 +31,7 @@ export default function Contact() {
 
             {/* ── Fondos decorativos ── */}
             <div className="pointer-events-none absolute inset-0 z-0">
-                <div className="absolute -top-40 -left-40 w-[600px] h-150 rounded-full opacity-10 blur-3xl bg-blue-raven" />
+                <div className="absolute -top-40 -left-40 w-150 h-150 rounded-full opacity-10 blur-3xl bg-blue-raven" />
                 <div className="absolute -bottom-40 -right-40 w-125 h-125 rounded-full opacity-10 blur-3xl bg-blue-electric" />
 
                 <div className={`absolute top-22 left-4 transition-opacity duration-700 ${isVisibleW ? "opacity-[0.06]" : "opacity-0"}`}>
