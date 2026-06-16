@@ -1,24 +1,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function ContactMethod({ title, icon,href }) {
-    return (
-        <a href={href}
-            target={title === "WhatsApp" ? "_blank" : "_self"} 
-            rel="noreferrer"
-            className="flex flex-col items-center gap-1 cursor-pointer transition-colors hover:text-blue-mid"
-        >
-            <div className="flex flex-col items-center gap-1 cursor-pointer">
-                <div className="w-12 h-12 flex items-center justify-center">
-                    <FontAwesomeIcon
-                        icon={icon}
-                        className="text-4xl"
-                    />
-                </div>
+export default function ContactMethod({ title, icon, href, setState }) {
+    const isExternal = href?.startsWith("http");
 
-                <span className="text-small">
-                    {title}
-                </span>
+    return (
+        <a
+            href={href}
+            target={isExternal ? "_blank" : "_self"}
+            rel={isExternal ? "noreferrer" : undefined}
+            className="flex flex-col text-white items-center gap-1 cursor-pointer transition-all hover:scale-110 hover:text-blue-raven "
+            onMouseEnter={()=>(setState(true))}
+            onMouseLeave={()=>(setState(false))}
+        >
+            <div className="flex items-center justify-center">
+                <FontAwesomeIcon icon={icon} style={{ fontSize: "3rem" }} />
             </div>
+
+            <span className="text-small">
+                {title}
+            </span>
         </a>
-    ); 
-} 
+    );
+}
