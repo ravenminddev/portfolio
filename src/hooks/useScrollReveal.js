@@ -33,7 +33,7 @@ export default function useScrollReveal({ threshold = 0.15, delay = 0 } = {}) {
       observer.disconnect();
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [delay]);
+  }, [delay, threshold]);
 
   return { ref, isVisible };
 }
