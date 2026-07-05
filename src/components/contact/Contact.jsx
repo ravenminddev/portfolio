@@ -7,6 +7,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import useScrollReveal from "../../hooks/useScrollReveal";
 
+function InfoRow({ icon, label, children }) {
+    return (
+        <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-xl bg-blue-raven/20 flex items-center justify-center text-blue-electric shrink-0">
+                <FontAwesomeIcon icon={icon} />
+            </div>
+            <div>
+                <span className="block text-small text-text-muted mb-0.5">{label}</span>
+                {children}
+            </div>
+        </div>
+    );
+}
+
 export default function Contact() {
     const [isVisibleW, setIsVisibleW] = useState(false);
     const [isVisibleM, setIsVisibleM] = useState(false);
@@ -23,11 +37,12 @@ export default function Contact() {
             `Empresa/Proyecto: ${empresa}\nCorreo: ${correo}\n\nIdea de proyecto:\n${idea}\n\nRequerimientos adicionales:\n${requerimientos}`
         );
         window.open(`mailto:ravenmind.dev@gmail.com?subject=${subject}&body=${body}`, "_blank");
-        setForm({ empresa: "", correo: "", idea: "", requerimientos: "" });
+        // No limpiamos el formulario automáticamente: mailto: no confirma que el usuario
+        // realmente haya enviado el correo (puede cancelar la ventana del cliente de mail).
     };
 
     return (
-        <section id="contacto" className="relative bg-black text-white py-24 md:py-32 overflow-hidden">
+        <section id="contacto" className="relative bg-black text-white py-section overflow-hidden scroll-mt-20">
 
             {/* ── Fondos decorativos ── */}
             <div className="pointer-events-none absolute inset-0 z-0">
@@ -35,16 +50,16 @@ export default function Contact() {
                 <div className="absolute -bottom-40 -right-40 w-125 h-125 rounded-full opacity-10 blur-3xl bg-blue-electric" />
 
                 <div className={`absolute top-22 left-4 transition-opacity duration-700 ${isVisibleW ? "opacity-[0.06]" : "opacity-0"}`}>
-                    <FontAwesomeIcon icon={faWhatsapp} style={{ fontSize: "28rem" }} />
+                    <FontAwesomeIcon icon={faWhatsapp} className="text-[14rem] sm:text-[20rem] lg:text-[28rem]" />
                 </div>
                 <div className={`absolute top-22 right-4 transition-opacity duration-700 ${isVisibleM ? "opacity-[0.06]" : "opacity-0"}`}>
-                    <FontAwesomeIcon icon={faEnvelope} style={{ fontSize: "28rem" }} />
+                    <FontAwesomeIcon icon={faEnvelope} className="text-[14rem] sm:text-[20rem] lg:text-[28rem]" />
                 </div>
             </div>
 
             {/* ── Contenido ── */}
             <div ref={ref} className="relative z-10 max-w-6xl mx-auto px-6">
-                <div className="flex items-center justify-center gap-3 mb-6">
+                <div className="flex items-center justify-center gap-3 mb-4">
                     <div className="h-px w-12 bg-blue-electric opacity-50" />
                     <span className="text-small font-semibold tracking-widest uppercase text-blue-electric">
                         Hablemos
@@ -52,31 +67,32 @@ export default function Contact() {
                     <div className="h-px w-12 bg-blue-electric opacity-50" />
                 </div>
 
-                <h2 className="text-big-title-v font-title tracking-wide font-bold text-center font-display leading-none mb-4">
+                <h2 className="text-title-mobile lg:text-big-title-v font-title tracking-wide font-bold text-center font-display leading-none mb-4">
                     ¿Tienes{" "}
                     <span className="text-blue-electric">una idea</span>
                     <br />
                     en mente?
                 </h2>
 
-                <p className="text-body text-center text-text-muted leading-relaxed max-w-2xl mx-auto mb-14">
+                <p className="text-body text-center text-text-muted leading-relaxed max-w-2xl mx-auto mb-16 sm:mb-14">
                     Cuéntanos sobre tu proyecto. Estamos listos para diseñar y desarrollar
                     la plataforma web que tu empresa necesita para crecer.
                 </p>
 
-                <div className={`grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 mt-8 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+                <div className={`grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 mt-8 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
 
                     {/* ── Info de contacto ── */}
-                    <div className="lg:col-span-2 flex flex-col gap-8">
+                    <div className="lg:col-span-2 flex flex-col gap-10 sm:gap-8">
                         <div>
-                            <h3 className="text-page-title font-semibold text-white-soft mb-4">Contacto directo</h3>
-                            <p className="text-body text-white/60 leading-relaxed text-justify">
+                            <h3 className="text-page-title font-semibold text-white-soft mb-6 sm:mb-4">Contacto directo</h3>
+                            <p className="text-body2 text-white/60 leading-relaxed text-justify">
                                 Prefieres hablar directamente? Escríbenos por WhatsApp o envíanos un correo. Respondemos en minutos.
                             </p>
                         </div>
 
-                        <div className="flex items-center justify-center gap-16">
-                            <ContactMethod
+                        <div className="flex justify-center">
+                            <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-center sm:gap-16">
+                                <ContactMethod
                                 title="WhatsApp"
                                 icon={faWhatsapp}
                                 href="https://wa.me/573175140183?text=Hola, estoy interesado en sus servicios."
@@ -88,56 +104,40 @@ export default function Contact() {
                                 href="mailto:ravenmind.dev@gmail.com?subject=Consulta desde el Portafolio.&body=Hola, estoy interesado en sus servicios."
                                 setState={setIsVisibleM}
                             />
+                            </div>
                         </div>
 
                         <div className="rounded-2xl bg-black-soft/75 backdrop-blur-md border border-muted/20 p-6 space-y-4">
-                            <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-blue-raven/20 flex items-center justify-center text-blue-electric shrink-0">
-                                    <FontAwesomeIcon icon={faEnvelope} />
-                                </div>
-                                <div>
-                                    <span className="block text-small text-text-muted mb-0.5">Email</span>
-                                    <a href="mailto:ravenmind.dev@gmail.com" className="text-white hover:text-blue-electric transition-colors">ravenmind.dev@gmail.com</a>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-blue-raven/20 flex items-center justify-center text-blue-electric shrink-0">
-                                    <FontAwesomeIcon icon={faWhatsapp} />
-                                </div>
-                                <div>
-                                    <span className="block text-small text-text-muted mb-0.5">Teléfono</span>
-                                    <a href="https://wa.me/573175140183" className="text-white hover:text-blue-electric transition-colors">+57 317 514 0183</a>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <div className="w-10 h-10 rounded-xl bg-blue-raven/20 flex items-center justify-center text-blue-electric shrink-0">
-                                    <FontAwesomeIcon icon={faLocationDot} />
-                                </div>
-                                <div>
-                                    <span className="block text-small text-text-muted mb-0.5">Ubicación</span>
-                                    <span className="text-white">Colombia / Remoto worldwide</span>
-                                </div>
-                            </div>
+                            <InfoRow icon={faEnvelope} label="Email">
+                                <a href="mailto:ravenmind.dev@gmail.com" className="text-white hover:text-blue-electric transition-colors">ravenmind.dev@gmail.com</a>
+                            </InfoRow>
+                            <InfoRow icon={faWhatsapp} label="Teléfono">
+                                <a href="https://wa.me/573175140183" className="text-white hover:text-blue-electric transition-colors">+57 317 514 0183</a>
+                            </InfoRow>
+                            <InfoRow icon={faLocationDot} label="Ubicación">
+                                <span className="text-white">Colombia / Remoto worldwide</span>
+                            </InfoRow>
                         </div>
                     </div>
 
                     {/* ── Formulario ── */}
                     <div className="lg:col-span-3">
-                        <div className="relative rounded-2xl bg-black-soft/75 backdrop-blur-md border border-muted/20 p-8 md:p-10 overflow-hidden"
+                        <div className="relative rounded-2xl bg-black-soft/75 backdrop-blur-md border border-muted/20 p-6 sm:p-8 md:p-10 overflow-hidden"
                             style={{ boxShadow: "0 0 60px rgba(0,52,158,0.12), inset 0 1px 0 rgba(255,255,255,0.04)" }}
                         >
                             <div className="absolute top-0 left-10 right-10 h-px bg-blue-electric" />
 
-                            <h3 className="text-page-title font-semibold text-white-soft mb-2">Contacto empresarial</h3>
-                            <p className="text-small text-text-muted mb-8">Cuéntanos los detalles y te responderemos lo antes posible.</p>
+                            <h3 className="text-page-title font-semibold text-white-soft mb-4">Contacto empresarial</h3>
+                            <p className="text-body2 text-text-muted mb-10 sm:mb-8">Cuéntanos los detalles y te responderemos lo antes posible.</p>
 
-                            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-6">
                                 <InputText
                                     label="Nombre de empresa o proyecto"
                                     type="text"
                                     placeholder="Ej. RavenMind Solutions"
                                     value={form.empresa}
                                     onChange={onChange("empresa")}
+                                    required
                                 />
 
                                 <InputText
@@ -146,6 +146,7 @@ export default function Contact() {
                                     placeholder="correo@empresa.com"
                                     value={form.correo}
                                     onChange={onChange("correo")}
+                                    required
                                 />
 
                                 <TextArea
@@ -153,6 +154,7 @@ export default function Contact() {
                                     placeholder="Cuéntanos brevemente qué quieres construir..."
                                     value={form.idea}
                                     onChange={onChange("idea")}
+                                    required
                                 />
 
                                 <TextArea
@@ -165,7 +167,7 @@ export default function Contact() {
                                 <div className="md:col-span-2 flex justify-center mt-2">
                                     <button
                                         type="submit"
-                                        className="group flex items-center gap-3 bg-blue-raven hover:bg-blue-electric px-10 py-5 rounded-full text-body font-semibold transition-all duration-300 hover:-translate-y-0.5"
+                                        className="group inline-flex items-center justify-center gap-2 sm:gap-3 bg-blue-raven hover:bg-blue-electric px-5 sm:px-10 py-2.5 sm:py-5 rounded-full text-body2 sm:text-body font-semibold transition-all duration-300 hover:-translate-y-0.5 mx-auto"
                                         style={{ boxShadow: "0 4px 24px rgba(0,163,255,0.2)" }}
                                     >
                                         <FontAwesomeIcon

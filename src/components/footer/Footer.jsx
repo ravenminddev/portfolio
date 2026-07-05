@@ -5,15 +5,15 @@ export default function Footer() {
 
     return (
         <footer className="relative z-10 w-full border-t border-muted/10 bg-black-soft/70 backdrop-blur-md">
-            <div className="max-w-6xl mx-auto px-6 py-12">
+            <div className="max-w-6xl mx-auto px-6 py-14 sm:py-12">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     {/* Logo */}
                     <a href="#inicio" className="opacity-80 hover:opacity-100 transition-opacity duration-300">
-                        <img src={logo} alt="Ravenmind" className="h-12 w-auto" />
+                        <img src={logo} alt="Ravenmind - Footer" className="h-12 w-auto" />
                     </a>
 
                     {/* Links */}
-                    <div className="flex items-center gap-8 text-small text-muted">
+                    <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-small text-muted">
                         <a href="#inicio" className="hover:text-white transition-colors duration-200">Inicio</a>
                         <a href="#servicios" className="hover:text-white transition-colors duration-200">Servicios</a>
                         <a href="#nosotros" className="hover:text-white transition-colors duration-200">Nosotros</a>

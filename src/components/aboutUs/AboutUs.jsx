@@ -37,11 +37,11 @@ export default function AboutUs() {
   }, [selectedMember]);
 
   return (
-    <section id="nosotros" className="w-full py-24 overflow-hidden">
+    <section id="nosotros" className="w-full py-section overflow-hidden scroll-mt-20">
       <div ref={ref} className="mx-auto max-w-6xl px-6 flex flex-col items-center">
 
         {/* ── Eyebrow ── */}
-        <div className={`flex items-center gap-3 mb-6 transition-[opacity,transform] duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <div className={`flex items-center gap-3 mb-4 transition-[opacity,transform] duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="h-px w-12 bg-blue-electric opacity-50" />
           <span className="text-small font-semibold tracking-widest uppercase text-blue-electric">
             El equipo
@@ -50,18 +50,18 @@ export default function AboutUs() {
         </div>
 
         {/* ── Título ── */}
-        <h2 className={`text-title font-bold font-title tracking-wide text-white-soft text-center mb-4 transition-[opacity,transform] duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <h2 className={`text-title-mobile lg:text-title font-bold font-title tracking-wide text-white-soft text-center mb-4 transition-[opacity,transform] duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           Nosotros
         </h2>
 
-        <p className={`text-body text-text-muted text-center max-w-xl mb-16 transition-[opacity,transform] duration-900 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <p className={`text-body text-text-muted text-center max-w-xl mb-16 transition-[opacity,transform] duration-[900ms] ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           Somos un equipo de ingenieros apasionados por construir soluciones digitales que hacen la diferencia.
         </p>
 
         {/* ── Grid de miembros ── */}
-        <div className="flex flex-col gap-10 mb-20">
-          {/* Primera fila */}
-          <div className="flex flex-wrap justify-center gap-20">
+        <div className="flex flex-col gap-8 sm:gap-10 mb-16 sm:mb-20 w-full">
+          {/* Primera fila: 3 columnas siempre */}
+          <div className="grid grid-cols-3 gap-3 sm:gap-10 lg:gap-20 justify-items-center max-w-md sm:max-w-2xl lg:max-w-none mx-auto">
             {members.slice(0, 3).map((member, i) => (
               <TeamComponent
                 key={member.name}
@@ -74,8 +74,8 @@ export default function AboutUs() {
             ))}
           </div>
 
-          {/* Segunda fila */}
-          <div className="flex flex-wrap justify-center gap-16">
+          {/* Segunda fila: 2 columnas siempre*/}
+          <div className="grid grid-cols-2 gap-3 sm:gap-10 lg:gap-16 justify-items-center max-w-[16rem] sm:max-w-md lg:max-w-none mx-auto">
             {members.slice(3).map((member, i) => (
               <TeamComponent
                 key={member.name}
@@ -93,10 +93,10 @@ export default function AboutUs() {
         <div className={`relative w-full rounded-card bg-black-soft border-2 border-transparent hover:border-blue-raven px-8 py-10 md:px-16 md:py-12 transition-[opacity,transform,border-color] duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           {/* Línea acento izquierda */}
           <div className="pl-8 border-l-4 border-blue-raven md:pl-12">
-            <h3 className="mb-3 text-page-title font-bold text-white-soft">
+            <h3 className="mb-3 text-subtitle sm:text-page-title font-bold text-white-soft">
               Nuestra misión
             </h3>
-            <p className="text-body text-white-soft max-w-3xl">
+            <p className="text-small sm:text-body text-white-soft max-w-3xl">
               Desarrollar soluciones web para empresas pequeñas, medianas o grandes que integran
               tecnologías vanguardistas, como modelos de inteligencia artificial, para permitir a
               nuestros clientes estar a la par del mercado y optimizar sus flujos de trabajo.
@@ -146,7 +146,7 @@ export default function AboutUs() {
                 height={128}
                 loading="lazy"
                 decoding="async"
-                className="size-40 rounded-full border-4 border-blue-raven object-cover animate-floating shadow-[0_0_30px_6px_rgba(0,52,158,0.5)]"
+                className="size-[var(--size-avatar-modal-sm)] sm:size-[var(--size-avatar-modal-md)] rounded-full border-4 border-blue-raven object-cover animate-floating shadow-[0_0_30px_6px_rgba(0,52,158,0.5)]"
               />
 
               <div className="flex items-center gap-3">
