@@ -146,7 +146,7 @@ export default function AboutUs() {
                 height={128}
                 loading="lazy"
                 decoding="async"
-                className="size-[var(--size-avatar-modal-sm)] sm:size-[var(--size-avatar-modal-md)] rounded-full border-4 border-blue-raven object-cover animate-floating shadow-[0_0_30px_6px_rgba(0,52,158,0.5)]"
+                className="size-40 rounded-full border-4 border-blue-raven object-cover animate-floating shadow-[0_0_30px_6px_rgba(0,52,158,0.5)]"
               />
 
               <div className="flex items-center gap-3">
