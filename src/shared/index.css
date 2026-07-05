@@ -33,7 +33,7 @@
     --size-avatar-modal-md: 8rem;                         
 
     /* ── Padding vertical de sección (reemplaza py-[Npx] sueltos por componente) ── */
-    --spacing-section: clamp(4.5rem, 3.2rem + 5.5vw, 8rem);
+    --spacing-section: clamp(6rem, 4rem + 6vw, 10rem);
 
     --animate-slide-up:   slide-up 0.3s ease-out;
     --animate-slide-left: slide-left 0.3s ease-out;
@@ -45,7 +45,7 @@
     --text-title-mobile: 2.5rem;
     --text-page-title: 1.65rem;
     --text-subtitle: 1.6rem;
-    --text-body: 1.32rem;
+    --text-body: 1.2rem;
     --text-body2: 1.05rem;
     --text-small: 0.885rem;
     --text-tiny: 0.75rem;

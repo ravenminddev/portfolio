@@ -82,10 +82,10 @@ export default function Contact() {
                 <div className={`grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 mt-8 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
 
                     {/* ── Info de contacto ── */}
-                    <div className="lg:col-span-2 flex flex-col gap-10 sm:gap-8">
+                    <div className="lg:col-span-2 flex flex-col gap-12 sm:gap-14">
                         <div>
-                            <h3 className="text-page-title font-semibold text-white-soft mb-6 sm:mb-4">Contacto directo</h3>
-                            <p className="text-body2 text-white/60 leading-relaxed text-justify">
+                            <h3 className="text-page-title font-semibold text-white-soft mb-6 sm:mb-4 text-center sm:text-left">Contacto directo</h3>
+                            <p className="text-body2 text-white/60 leading-relaxed text-center sm:text-justify">
                                 Prefieres hablar directamente? Escríbenos por WhatsApp o envíanos un correo. Respondemos en minutos.
                             </p>
                         </div>

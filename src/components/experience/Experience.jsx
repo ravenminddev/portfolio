@@ -15,7 +15,7 @@ export default function Experience() {
 
             <div
                 ref={ref}
-                className={`relative z-10 max-w-2xl mx-auto px-6 flex flex-col items-center text-center gap-5 transition-[opacity,transform] duration-700 ease-out ${
+                className={`relative z-10 max-w-md mx-auto px-6 flex flex-col items-center text-center gap-5 transition-[opacity,transform] duration-700 ease-out ${
                     isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
             >
@@ -41,7 +41,7 @@ export default function Experience() {
                     Sección en construcción
                 </h2>
 
-                <p className="text-body text-text-muted leading-relaxed max-w-md">
+                <p className="text-body text-text-muted leading-relaxed max-w-sm">
                     Estamos trabajando en esta sección para mostrarte nuestra experiencia y proyectos.
                     Vuelve pronto, va a valer la pena.
                 </p>

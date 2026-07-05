@@ -75,11 +75,11 @@ export default function NavBar() {
                     : "bg-transparent backdrop-blur-sm"
             }`}
         >
-            <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-14 sm:h-16 lg:h-[70px]">
+            <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-20 sm:h-20 lg:h-24">
 
                 {/* ── Logo ── */}
                 <a href="#inicio" onClick={(e) => handleLinkClick(e, "inicio")}>
-                    <img src={logo} alt="Ravenmind - Ir al inicio" width={80} height={80} className="h-9 sm:h-14 lg:h-20 w-auto" />
+                    <img src={logo} alt="Ravenmind - Ir al inicio" width={80} height={80} className="h-16 sm:h-18 lg:h-22 w-auto" />
                 </a>
 
                 {/* ── Links desktop ── */}
@@ -135,7 +135,7 @@ export default function NavBar() {
                 id="mobile-menu"
                 role="navigation"
                 aria-label="Menú principal"
-                className={`md:hidden absolute top-full left-0 right-0 bg-black-soft/95 backdrop-blur-xl border-t border-muted/20 transition-all duration-300 ease-in-out ${
+                className={`md:hidden overflow-hidden bg-black-soft/95 backdrop-blur-xl border-t border-muted/20 transition-all duration-300 ease-in-out ${
                     menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
                 }`}
             >
