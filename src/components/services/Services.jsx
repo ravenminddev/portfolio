@@ -18,7 +18,7 @@ export default function Services() {
   const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section className="w-full relative overflow-hidden" id="servicios">
+    <section className="w-full relative overflow-hidden scroll-mt-20 py-section" id="servicios">
 
       {/* Fondo decorativo */}
       <div className="pointer-events-none absolute inset-0 z-0">
@@ -26,7 +26,7 @@ export default function Services() {
         <div className="absolute bottom-0 left-0 w-100 h-100 rounded-full opacity-[0.06] blur-3xl bg-blue-electric" />
       </div>
 
-      <div ref={ref} className="relative z-10 mx-auto max-w-4xl px-6 flex flex-col items-center gap-5 py-24">
+      <div ref={ref} className="relative z-10 mx-auto max-w-4xl px-6 flex flex-col items-center gap-3">
 
         {/* Eyebrow */}
         <div className={`flex items-center gap-3 transition-[opacity,transform] duration-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
@@ -38,7 +38,7 @@ export default function Services() {
         </div>
 
         {/* Título */}
-        <h2 className={`font-bold font-title tracking-wide text-white text-title text-center mb-4 transition-[opacity,transform] duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <h2 className={`font-bold font-title tracking-wide text-white text-title-mobile lg:text-title text-center mb-4 transition-[opacity,transform] duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           ¿Qué ofrecemos?
         </h2>
 
@@ -46,7 +46,7 @@ export default function Services() {
         <div className="w-full flex flex-col gap-4 mt-4">
           {myServices.map((service, key) => (
             <Card
-              key={key}
+              key={service.title}
               title={service.title}
               description={service.description}
               bigDescription={service.bigDescription}
