@@ -104,6 +104,7 @@ export default function AboutUs() {
                 member={member}
                 onClick={openMember(member)}
                 index={i}
+                total={members.length}
               />
             </div>
           ))}

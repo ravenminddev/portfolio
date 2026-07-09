@@ -165,6 +165,18 @@
     to   { transform: translateY(0); }
 }
 
+/* Salida con nombre propio: CSS solo reinicia una animación si cambia el
+   nombre de la keyframe, así entrada/salida se repiten en cada ciclo. */
+@keyframes sweep-out-up {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-104%); }
+}
+
+@keyframes sweep-out-down {
+    from { transform: translateY(0); }
+    to   { transform: translateY(104%); }
+}
+
 @keyframes modal-in {
     from { opacity: 0; transform: translateY(1.75rem) scale(0.96); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
@@ -211,15 +223,15 @@
         animation: modal-in var(--motion-enter) var(--ease-settle) both;
     }
 
-    /* Salida: barrido inverso; retrae el retrato por donde entró. */
+    /* Salida = espejo de la entrada, en orden inverso vía --stagger-exit. */
     .exit-sweep-up {
-        animation: sweep-in-down var(--motion-enter) var(--ease-hold) reverse both;
-        animation-delay: var(--stagger, 0ms);
+        animation: sweep-out-up 850ms var(--ease-settle) both;
+        animation-delay: var(--stagger-exit, 0ms);
     }
 
     .exit-sweep-down {
-        animation: sweep-in-up var(--motion-enter) var(--ease-hold) reverse both;
-        animation-delay: var(--stagger, 0ms);
+        animation: sweep-out-down 850ms var(--ease-settle) both;
+        animation-delay: var(--stagger-exit, 0ms);
     }
 
     /* Titular display (Anton). */

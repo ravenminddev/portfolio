@@ -4,11 +4,17 @@ import { getMemberSocials } from "./memberSocials";
 
 /* Retrato del equipo: entra/sale con un barrido dentro de la máscara;
    hover/focus (o táctil) revela nombre, rol y redes; click abre la ficha. */
-export default function TeamComponent({ member, onClick, index = 0 }) {
-  const { ref, isVisible, hasRevealed } = useScrollReveal();
+export default function TeamComponent({ member, onClick, index = 0, total = 0 }) {
+  // Viewport reducido: el barrido de salida se dispara mientras el retrato
+  // aún está en pantalla, no cuando ya salió.
+  const { ref, isVisible, hasRevealed } = useScrollReveal({
+    rootMargin: "-20% 0px -20% 0px",
+  });
 
-  /* Pares por arriba, impares por abajo: estático antes de entrar,
-     barrido al entrar, barrido inverso al salir. */
+  /* Entrada: barrido en cascada del 1º al último (stagger = index).
+     Salida: mismo barrido invertido y en orden inverso (del último al 1º). */
+  const enterStagger = index * 90;
+  const exitStagger = (total - 1 - index) * 90;
   const sweep = isVisible
     ? index % 2
       ? "enter-sweep-up"
@@ -27,7 +33,7 @@ export default function TeamComponent({ member, onClick, index = 0 }) {
     <div
       ref={ref}
       className="group relative aspect-[4/5] xs:aspect-[3/4] w-full overflow-hidden"
-      style={{ "--stagger": `${index * 90}ms` }}
+      style={{ "--stagger": `${enterStagger}ms`, "--stagger-exit": `${exitStagger}ms` }}
     >
       <div className="tone-media absolute inset-0">
         <img
