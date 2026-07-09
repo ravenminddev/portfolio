@@ -32,6 +32,10 @@
     --size-avatar-modal-sm: 5.5rem;                       
     --size-avatar-modal-md: 8rem;                         
 
+    /* Breakpoint extra por debajo de sm: separa el móvil (franja) del resto
+       (grid). Móvil = pantallas < 576px. Genera el variant xs: (≥36rem/576px). */
+    --breakpoint-xs: 36rem;
+
     /* ── Padding vertical de sección (reemplaza py-[Npx] sueltos por componente) ── */
     --spacing-section: clamp(6rem, 4rem + 6vw, 10rem);
 

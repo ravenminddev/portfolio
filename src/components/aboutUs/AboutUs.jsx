@@ -97,11 +97,11 @@ export default function AboutUs() {
           </p>
         </div>
 
-        {/* ── Franja del equipo. Móvil y tablet: strip horizontal con snap.
-             Desktop (lg): fila de 5. ── */}
-        <div className="flex snap-x snap-mandatory gap-2 overflow-x-auto pb-3 lg:grid lg:grid-cols-5 lg:gap-2 lg:overflow-visible lg:pb-0">
+        {/* ── Franja del equipo. Celular estrecho (<xs): strip horizontal con
+             snap. Desde xs (≥480px): fila de 5, igual que desktop. ── */}
+        <div className="flex snap-x snap-mandatory gap-2 overflow-x-auto pb-3 xs:grid xs:grid-cols-5 xs:gap-2 xs:overflow-visible xs:pb-0">
           {members.map((member, i) => (
-            <div key={member.name} className="min-w-[62vw] snap-center lg:min-w-0">
+            <div key={member.name} className="min-w-[56vw] snap-center xs:min-w-0">
               <TeamComponent
                 member={member}
                 onClick={openMember(member)}

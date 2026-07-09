@@ -29,7 +29,7 @@ export default function TeamComponent({ member, onClick, index = 0 }) {
   return (
     <div
       ref={ref}
-      className="group relative aspect-[3/4] w-full overflow-hidden"
+      className="group relative aspect-[4/5] xs:aspect-[3/4] w-full overflow-hidden"
       style={{ "--stagger": `${index * 90}ms` }}
     >
       <div className="tone-media absolute inset-0">
@@ -56,8 +56,8 @@ export default function TeamComponent({ member, onClick, index = 0 }) {
       {/* Info revelada: en táctil siempre visible; en desktop aparece con
           hover / focus junto con el color original del retrato */}
       <div
-        className={`pointer-events-none absolute inset-x-0 bottom-0 z-20 flex flex-col gap-1 bg-gradient-to-t from-black/95 via-black/55 to-transparent p-4 pt-12 transition-[opacity,transform] duration-[var(--motion-base)] ease-[var(--ease-hold)] lg:translate-y-3 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 ${
-          isVisible ? "lg:opacity-0" : "opacity-0"
+        className={`pointer-events-none absolute inset-x-0 bottom-0 z-20 flex flex-col gap-1 bg-gradient-to-t from-black/95 via-black/55 to-transparent p-4 pt-12 transition-[opacity,transform] duration-[var(--motion-base)] ease-[var(--ease-hold)] xs:translate-y-3 xs:group-hover:translate-y-0 xs:group-hover:opacity-100 xs:group-focus-within:translate-y-0 xs:group-focus-within:opacity-100 ${
+          isVisible ? "xs:opacity-0" : "opacity-0"
         }`}
       >
         <h3 className="type-headline text-title-lg text-white-soft">{member.name}</h3>
