@@ -1,36 +1,39 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import useScrollReveal from "../../hooks/useScrollReveal";
+import { getMemberSocials } from "./memberSocials";
 
-/* Retrato del equipo — franja a gran formato (lenguaje Pluma Negra
-   reexpresado con los tokens actuales). Entra con un barrido dentro de la
-   máscara .tone-media, alternando arriba/abajo con stagger por retrato.
-   Hover/focus (o siempre, en táctil) revela nombre, rol y redes.
-   Click abre la ficha en el modal. */
-export default function TeamComponent({ member, onClick, index = 0 }) {
-  const { ref, isVisible } = useScrollReveal();
+/* Retrato del equipo: entra/sale con un barrido dentro de la máscara;
+   hover/focus (o táctil) revela nombre, rol y redes; click abre la ficha. */
+export default function TeamComponent({ member, onClick, index = 0, total = 0 }) {
+  // Viewport reducido: el barrido de salida se dispara mientras el retrato
+  // aún está en pantalla, no cuando ya salió.
+  const { ref, isVisible, hasRevealed } = useScrollReveal({
+    rootMargin: "-20% 0px -20% 0px",
+  });
 
-  /* Antes de entrar al viewport el retrato queda fuera de la máscara;
-     al ser visible arranca el barrido alternando arriba/abajo. */
+  /* Entrada: barrido en cascada del 1º al último (stagger = index).
+     Salida: mismo barrido invertido y en orden inverso (del último al 1º). */
+  const enterStagger = index * 90;
+  const exitStagger = (total - 1 - index) * 90;
   const sweep = isVisible
     ? index % 2
       ? "enter-sweep-up"
       : "enter-sweep-down"
-    : index % 2
-      ? "translate-y-[104%]"
-      : "-translate-y-[104%]";
+    : hasRevealed
+      ? index % 2
+        ? "exit-sweep-down"
+        : "exit-sweep-up"
+      : index % 2
+        ? "translate-y-[104%]"
+        : "-translate-y-[104%]";
 
-  const socials = [
-    { icon: faGithub, href: member.git, label: `GitHub de ${member.name}` },
-    { icon: faInstagram, href: member.instagram, label: `Instagram de ${member.name}` },
-    { icon: faLinkedin, href: member.linkedin, label: `LinkedIn de ${member.name}` },
-  ].filter((s) => s.href);
+  const socials = getMemberSocials(member);
 
   return (
     <div
       ref={ref}
       className="group relative aspect-[4/5] xs:aspect-[3/4] w-full overflow-hidden"
-      style={{ "--stagger": `${index * 90}ms` }}
+      style={{ "--stagger": `${enterStagger}ms`, "--stagger-exit": `${exitStagger}ms` }}
     >
       <div className="tone-media absolute inset-0">
         <img
@@ -40,12 +43,11 @@ export default function TeamComponent({ member, onClick, index = 0 }) {
           height={144}
           loading="lazy"
           decoding="async"
-          className={sweep}
-          style={{ objectPosition: "50% 25%" }}
+          className={`${sweep} object-portrait`}
         />
       </div>
 
-      {/* Click principal — abre la ficha completa en el modal */}
+      {/* Botón overlay: abre la ficha */}
       <button
         type="button"
         onClick={onClick}
@@ -53,8 +55,7 @@ export default function TeamComponent({ member, onClick, index = 0 }) {
         className="absolute inset-0 z-10 cursor-pointer focus-visible:outline-none"
       />
 
-      {/* Info revelada: en táctil siempre visible; en desktop aparece con
-          hover / focus junto con el color original del retrato */}
+      {/* Info: siempre visible en táctil; hover/focus en desktop */}
       <div
         className={`pointer-events-none absolute inset-x-0 bottom-0 z-20 flex flex-col gap-1 bg-gradient-to-t from-black/95 via-black/55 to-transparent p-4 pt-12 transition-[opacity,transform] duration-[var(--motion-base)] ease-[var(--ease-hold)] xs:translate-y-3 xs:group-hover:translate-y-0 xs:group-hover:opacity-100 xs:group-focus-within:translate-y-0 xs:group-focus-within:opacity-100 ${
           isVisible ? "xs:opacity-0" : "opacity-0"
@@ -65,9 +66,9 @@ export default function TeamComponent({ member, onClick, index = 0 }) {
           {member.role}
         </span>
         <div className="pointer-events-auto mt-2 flex gap-4">
-          {socials.map(({ icon, href, label }) => (
+          {socials.map(({ key, icon, href, label }) => (
             <a
-              key={label}
+              key={key}
               href={href}
               target="_blank"
               rel="noreferrer"
